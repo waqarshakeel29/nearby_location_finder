@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nearby_location_finder/resources/color.dart';
+import 'package:nearby_location_finder/resources/text_style.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,21 +15,36 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Timer(
-    //     const Duration(seconds: 3),
-    //     () => Navigator.pushReplacement(context,
-    //         MaterialPageRoute(builder: (context) => const SecondScreen())));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Geeks For Geeks")),
-      body: const Center(
-          child: Text(
-        "Home page",
-        textScaleFactor: 2,
-      )),
-    );
+        appBar: AppBar(
+          title: const Text(
+            "Bonjure",
+            style: AppTextStyle.body1,
+          ),
+          centerTitle: true,
+          backgroundColor: AppColor.primaryDark,
+        ),
+        body: Theme(
+          data: ThemeData(
+              colorScheme: ColorScheme.fromSwatch()
+                  .copyWith(secondary: AppColor.primaryLight)),
+          child: GridView.count(
+            crossAxisCount: 2,
+            children: List.generate(7, (index) {
+              return Card(
+                child: Center(
+                  child: Text(
+                    'Item $index',
+                    style: AppTextStyle.body2,
+                  ),
+                ),
+              );
+            }),
+          ),
+        ));
   }
 }
