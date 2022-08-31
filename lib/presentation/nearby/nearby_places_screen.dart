@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:nearby_location_finder/app_router.gr.dart';
 import 'package:nearby_location_finder/resources/color.dart';
 import 'package:nearby_location_finder/resources/text_style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class NearbyPlacesScreen extends StatefulWidget {
+  const NearbyPlacesScreen({super.key});
 
   @override
-  HomeScreenState createState() {
-    return HomeScreenState();
+  NearbyPlacesScreenState createState() {
+    return NearbyPlacesScreenState();
   }
 }
 
-class HomeScreenState extends State<HomeScreen> {
+class NearbyPlacesScreenState extends State<NearbyPlacesScreen> {
   @override
   void initState() {
     super.initState();
@@ -25,7 +24,7 @@ class HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           toolbarHeight: 50,
           title: const Text(
-            "Near by Location",
+            "Nearby Places",
             style: AppTextStyle.body1,
           ),
           centerTitle: true,
@@ -47,16 +46,12 @@ class HomeScreenState extends State<HomeScreen> {
 
   gridItem(int index) {
     var tileTitle = '';
-    var onTap = () {};
     switch (index) {
       case 0:
         tileTitle = 'Current Location';
         break;
       case 1:
         tileTitle = 'Nearby Places';
-        onTap = () {
-          GetIt.I<AppRouter>().push(const NearbyPlacesScreen());
-        };
         break;
       case 2:
         tileTitle = 'Directions';
@@ -75,7 +70,9 @@ class HomeScreenState extends State<HomeScreen> {
         break;
     }
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        openMap();
+      },
       child: Card(
         child: Center(
           child: Text(
@@ -85,5 +82,15 @@ class HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  static Future<void> openMap() async {
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=hospital';
+    if (await canLaunchUrl(Uri.parse(googleUrl))) {
+      await launchUrl(Uri.parse(googleUrl));
+    } else {
+      throw 'Could not open the map.';
+    }
   }
 }
