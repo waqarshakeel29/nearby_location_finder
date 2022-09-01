@@ -4,16 +4,16 @@ import 'package:nearby_location_finder/resources/constant.dart';
 import 'package:nearby_location_finder/resources/text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NearbyPlacesScreen extends StatefulWidget {
-  const NearbyPlacesScreen({super.key});
+class WondersOfWorldScreen extends StatefulWidget {
+  const WondersOfWorldScreen({super.key});
 
   @override
-  NearbyPlacesScreenState createState() {
-    return NearbyPlacesScreenState();
+  WondersOfWorldScreenState createState() {
+    return WondersOfWorldScreenState();
   }
 }
 
-class NearbyPlacesScreenState extends State<NearbyPlacesScreen> {
+class WondersOfWorldScreenState extends State<WondersOfWorldScreen> {
   @override
   void initState() {
     super.initState();

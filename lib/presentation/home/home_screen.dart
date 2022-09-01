@@ -40,7 +40,7 @@ class HomeScreenState extends State<HomeScreen> {
             childAspectRatio: ((MediaQuery.of(context).size.width / 2) /
                 ((MediaQuery.of(context).size.height - 60 - 24) / 4)),
             crossAxisCount: 2,
-            children: List.generate(7, (index) => gridItem(index)),
+            children: List.generate(6, (index) => gridItem(index)),
           ),
         ));
   }
@@ -51,6 +51,9 @@ class HomeScreenState extends State<HomeScreen> {
     switch (index) {
       case 0:
         tileTitle = 'Current Location';
+        onTap = () {
+          GetIt.I<AppRouter>().push(const CurrentLocationScreen());
+        };
         break;
       case 1:
         tileTitle = 'Nearby Places';
@@ -59,15 +62,15 @@ class HomeScreenState extends State<HomeScreen> {
         };
         break;
       case 2:
-        tileTitle = 'Directions';
+        tileTitle = 'Wonders of World';
+        onTap = () {
+          GetIt.I<AppRouter>().push(const WondersOfWorldScreen());
+        };
         break;
       case 3:
-        tileTitle = 'Famous Places';
-        break;
-      case 4:
         tileTitle = 'Feedback';
         break;
-      case 5:
+      case 4:
         tileTitle = 'Rating';
         break;
       default:
