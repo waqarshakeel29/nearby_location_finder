@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nearby_location_finder/resources/color.dart';
 import 'package:nearby_location_finder/resources/constant.dart';
 import 'package:nearby_location_finder/resources/text_style.dart';
@@ -25,7 +26,7 @@ class WondersOfWorldScreenState extends State<WondersOfWorldScreen> {
         appBar: AppBar(
           toolbarHeight: 50,
           title: const Text(
-            "Nearby Places",
+            "Wonders of World",
             style: AppTextStyle.body1,
           ),
           centerTitle: true,
@@ -40,16 +41,32 @@ class WondersOfWorldScreenState extends State<WondersOfWorldScreen> {
                 ((MediaQuery.of(context).size.height - 60 - 24) / 4)),
             crossAxisCount: 2,
             children: List.generate(
-                23,
+                AppConstants.wondersOfWorldList.length,
                 (index) => GestureDetector(
                       onTap: () {
-                        openMap(AppConstants.nearByPlacesList[index]);
+                        openMap(
+                            AppConstants.wondersOfWorldList.values
+                                .toList()[index][0] as LatLng,
+                            index);
                       },
                       child: Card(
                         child: Center(
-                          child: Text(
-                            AppConstants.nearByPlacesList[index],
-                            style: AppTextStyle.body2,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(
+                                image: AssetImage(AppConstants
+                                    .wondersOfWorldList.values
+                                    .toList()[index][1] as String),
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                height: MediaQuery.of(context).size.width * 0.3,
+                              ),
+                              Text(
+                                AppConstants.wondersOfWorldList.keys
+                                    .toList()[index],
+                                style: AppTextStyle.body3Medium,
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -58,9 +75,10 @@ class WondersOfWorldScreenState extends State<WondersOfWorldScreen> {
         ));
   }
 
-  static Future<void> openMap(String place) async {
-    String googleUrl =
-        'https://www.google.com/maps/search/?api=1&z=2&query=$place';
+  static Future<void> openMap(LatLng latlng, int index) async {
+    String googleUrl = index != 3
+        ? 'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${latlng.latitude}%2C${latlng.longitude}'
+        : 'https://www.google.com/maps/search/?api=1&query=${latlng.latitude}%2C${latlng.longitude}';
     if (await canLaunchUrl(Uri.parse(googleUrl))) {
       await launchUrl(Uri.parse(googleUrl));
     } else {

@@ -36,25 +36,35 @@ class NearbyPlacesScreenState extends State<NearbyPlacesScreen> {
               colorScheme: ColorScheme.fromSwatch()
                   .copyWith(secondary: AppColor.primaryLight)),
           child: GridView.count(
-            childAspectRatio: ((MediaQuery.of(context).size.width / 2) /
-                ((MediaQuery.of(context).size.height - 60 - 24) / 4)),
-            crossAxisCount: 2,
-            children: List.generate(
-                23,
+              childAspectRatio: ((MediaQuery.of(context).size.width / 2) /
+                  ((MediaQuery.of(context).size.height - 60 - 24) / 4)),
+              crossAxisCount: 2,
+              children: List.generate(
+                AppConstants.nearByPlacesList.length,
                 (index) => GestureDetector(
-                      onTap: () {
-                        openMap(AppConstants.nearByPlacesList[index]);
-                      },
-                      child: Card(
-                        child: Center(
-                          child: Text(
-                            AppConstants.nearByPlacesList[index],
-                            style: AppTextStyle.body2,
-                          ),
+                    onTap: () {
+                      openMap(AppConstants.nearByPlacesList[index][0]);
+                    },
+                    child: Card(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image(
+                              image: AssetImage(
+                                  AppConstants.nearByPlacesList[index][1]),
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              height: MediaQuery.of(context).size.width * 0.3,
+                            ),
+                            Text(
+                              AppConstants.nearByPlacesList[index][0],
+                              style: AppTextStyle.body3Medium,
+                            ),
+                          ],
                         ),
                       ),
                     )),
-          ),
+              )),
         ));
   }
 
