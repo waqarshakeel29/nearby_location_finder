@@ -43,21 +43,24 @@ class NearbyPlacesScreenState extends State<NearbyPlacesScreen> {
                 AppConstants.nearByPlacesList.length,
                 (index) => GestureDetector(
                     onTap: () {
-                      openMap(AppConstants.nearByPlacesList[index][0]);
+                      openMap(AppConstants.nearByPlacesList[index].name);
                     },
                     child: Card(
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image(
-                              image: AssetImage(
-                                  AppConstants.nearByPlacesList[index][1]),
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              height: MediaQuery.of(context).size.width * 0.3,
+                            Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Image(
+                                image: AssetImage(AppConstants
+                                    .nearByPlacesList[index].iconPath),
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                height: MediaQuery.of(context).size.width * 0.2,
+                              ),
                             ),
                             Text(
-                              AppConstants.nearByPlacesList[index][0],
+                              AppConstants.nearByPlacesList[index].name,
                               style: AppTextStyle.body3Medium,
                             ),
                           ],

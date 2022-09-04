@@ -44,10 +44,8 @@ class WondersOfWorldScreenState extends State<WondersOfWorldScreen> {
                 AppConstants.wondersOfWorldList.length,
                 (index) => GestureDetector(
                       onTap: () {
-                        openMap(
-                            AppConstants.wondersOfWorldList.values
-                                .toList()[index][0] as LatLng,
-                            index);
+                        openMap(AppConstants.wondersOfWorldList[index].latLng,
+                            AppConstants.wondersOfWorldList[index].name);
                       },
                       child: Card(
                         child: Center(
@@ -56,14 +54,12 @@ class WondersOfWorldScreenState extends State<WondersOfWorldScreen> {
                             children: [
                               Image(
                                 image: AssetImage(AppConstants
-                                    .wondersOfWorldList.values
-                                    .toList()[index][1] as String),
+                                    .wondersOfWorldList[index].iconPath),
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 height: MediaQuery.of(context).size.width * 0.3,
                               ),
                               Text(
-                                AppConstants.wondersOfWorldList.keys
-                                    .toList()[index],
+                                AppConstants.wondersOfWorldList[index].name,
                                 style: AppTextStyle.body3Medium,
                               ),
                             ],
@@ -75,10 +71,10 @@ class WondersOfWorldScreenState extends State<WondersOfWorldScreen> {
         ));
   }
 
-  static Future<void> openMap(LatLng latlng, int index) async {
-    String googleUrl = index != 3
-        ? 'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${latlng.latitude}%2C${latlng.longitude}'
-        : 'https://www.google.com/maps/search/?api=1&query=${latlng.latitude}%2C${latlng.longitude}';
+  static Future<void> openMap(LatLng latlng, String name) async {
+    String googleUrl = name.toUpperCase() == 'GREAT WALL OF CHINA'
+        ? 'https://www.google.com/maps/search/?api=1&query=${latlng.latitude}%2C${latlng.longitude}'
+        : 'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${latlng.latitude}%2C${latlng.longitude}';
     if (await canLaunchUrl(Uri.parse(googleUrl))) {
       await launchUrl(Uri.parse(googleUrl));
     } else {
