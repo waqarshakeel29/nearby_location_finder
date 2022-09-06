@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nearby_location_finder/app_router.gr.dart';
 import 'package:nearby_location_finder/resources/assets.dart';
-import 'package:nearby_location_finder/resources/color.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
