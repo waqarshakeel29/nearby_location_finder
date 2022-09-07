@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nearby_location_finder/app_router.gr.dart';
+import 'package:nearby_location_finder/controller/theme_controller.dart';
 import 'package:nearby_location_finder/resources/color.dart';
 import 'package:nearby_location_finder/resources/confimation_dialog.dart';
 import 'package:nearby_location_finder/resources/main_menu_item.dart';
@@ -19,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  ThemeController themeController = GetIt.instance<ThemeController>();
   @override
   void initState() {
     super.initState();
@@ -35,17 +37,30 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           centerTitle: true,
           backgroundColor: AppColor.primaryDark,
+          actions: [
+            MaterialButton(
+                color: AppColor.secondaryColor,
+                onPressed: () {
+                  themeController.onChange(
+                      themeController.themeMode == ThemeMode.dark
+                          ? ThemeMode.light
+                          : ThemeMode.dark);
+                })
+          ],
         ),
         body: Theme(
           data: ThemeData(
               colorScheme: ColorScheme.fromSwatch()
                   .copyWith(secondary: AppColor.primaryLight)),
-          child: GridView.count(
-            physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio: ((MediaQuery.of(context).size.width / 2) /
-                ((MediaQuery.of(context).size.height - 60 - 24) / 4)),
-            crossAxisCount: 2,
-            children: List.generate(5, (index) => gridItem(index)),
+          child: Container(
+            color: Theme.of(context).colorScheme.surface,
+            child: GridView.count(
+              physics: const NeverScrollableScrollPhysics(),
+              childAspectRatio: ((MediaQuery.of(context).size.width / 2) /
+                  ((MediaQuery.of(context).size.height - 60 - 24) / 4)),
+              crossAxisCount: 2,
+              children: List.generate(5, (index) => gridItem(index)),
+            ),
           ),
         ));
   }
