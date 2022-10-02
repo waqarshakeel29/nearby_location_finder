@@ -24,9 +24,10 @@ class NearbyPlacesScreenState extends State<NearbyPlacesScreen> {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 50,
-          title: const Text(
+          title: Text(
             "Nearby Places",
-            style: AppTextStyle.body1,
+            style: AppTextStyle.body1
+                .copyWith(color: Theme.of(context).colorScheme.surface),
           ),
           centerTitle: true,
           backgroundColor: AppColor.primaryDark,

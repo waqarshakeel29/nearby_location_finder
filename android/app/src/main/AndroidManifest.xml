@@ -12,7 +12,7 @@
     </queries>
     
    <application
-        android:label="nearby_location_finder"
+        android:label="Nearby Location Finder"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

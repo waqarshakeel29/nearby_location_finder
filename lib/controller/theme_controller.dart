@@ -23,7 +23,7 @@ class ThemeController extends ChangeNotifier {
 
   ThemeData getDarkTheme() {
     return ThemeData(
-        primaryColor: AppColor.primaryColor,
+        primaryColor: AppColor.primaryColorDark,
         colorScheme: const ColorScheme(
           brightness: Brightness.dark,
           primary: AppColor.primaryColor,

@@ -25,9 +25,10 @@ class WondersOfWorldScreenState extends State<WondersOfWorldScreen> {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 50,
-          title: const Text(
+          title: Text(
             "Wonders of World",
-            style: AppTextStyle.body1,
+            style: AppTextStyle.body1
+                .copyWith(color: Theme.of(context).colorScheme.surface),
           ),
           centerTitle: true,
           backgroundColor: AppColor.primaryDark,

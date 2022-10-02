@@ -31,36 +31,37 @@ class HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 50,
-          title: const Text(
+          title: Text(
             "Nearby Location",
-            style: AppTextStyle.body1,
+            style: AppTextStyle.body1
+                .copyWith(color: Theme.of(context).colorScheme.surface),
           ),
           centerTitle: true,
           backgroundColor: AppColor.primaryDark,
-          actions: [
-            MaterialButton(
-                color: AppColor.secondaryColor,
-                onPressed: () {
-                  themeController.onChange(
-                      themeController.themeMode == ThemeMode.dark
-                          ? ThemeMode.light
-                          : ThemeMode.dark);
-                })
-          ],
+          // actions: [
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: MaterialButton(
+          //       color: Theme.of(context).colorScheme.onPrimary,
+          //       onPressed: () {
+          //         themeController.onChange(
+          //             themeController.themeMode == ThemeMode.dark
+          //                 ? ThemeMode.light
+          //                 : ThemeMode.dark);
+          //       }),
+          // )
+          // ],
         ),
         body: Theme(
           data: ThemeData(
               colorScheme: ColorScheme.fromSwatch()
                   .copyWith(secondary: AppColor.primaryLight)),
-          child: Container(
-            color: Theme.of(context).colorScheme.surface,
-            child: GridView.count(
-              physics: const NeverScrollableScrollPhysics(),
-              childAspectRatio: ((MediaQuery.of(context).size.width / 2) /
-                  ((MediaQuery.of(context).size.height - 60 - 24) / 4)),
-              crossAxisCount: 2,
-              children: List.generate(5, (index) => gridItem(index)),
-            ),
+          child: GridView.count(
+            physics: const NeverScrollableScrollPhysics(),
+            childAspectRatio: ((MediaQuery.of(context).size.width / 2) /
+                ((MediaQuery.of(context).size.height - 60 - 24) / 4)),
+            crossAxisCount: 2,
+            children: List.generate(5, (index) => gridItem(index)),
           ),
         ));
   }
